@@ -34,11 +34,7 @@
   <div id="pageListContainer">
     <h2>Page List</h2>
     <ul id="pageList">
-      <!-- You can dynamically generate the list of pages here using JavaScript -->
-      <!-- For example: -->
-      <!-- <li><a href="page1.html">Page 1</a></li> -->
-      <!-- <li><a href="page2.html">Page 2</a></li> -->
-      <!-- <li><a href="page3.html">Page 3</a></li> -->
+      <!-- Page links will be dynamically generated here using JavaScript -->
     </ul>
   </div>
 
@@ -54,25 +50,25 @@
     function updateIframe(pageUrl) {
       iframe.src = pageUrl;
     }
-  async function fetchAllHTMLPages() {
-            try {
-                const response = await fetch('.');
-                const text = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
 
-                // Find all <a> elements that link to .html pages (excluding 'index.html')
-                const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href="index.html"])'));
-                return links.map(link => link.getAttribute('href'));
-            } catch (error) {
-                console.error('Error fetching HTML pages:', error);
-                return [];
-            }
-        }
+    async function fetchAllHTMLPages() {
+      try {
+        const response = await fetch('.');
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
 
+        // Find all <a> elements that link to .html pages (excluding 'index.html')
+        const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href="index.html"])'));
+        return links.map(link => link.getAttribute('href'));
+      } catch (error) {
+        console.error('Error fetching HTML pages:', error);
+        return [];
+      }
+    }
 
     // Event listener for clicking on a page link
-    pageList.addEventListener('click', (event) => {
+    pageList.addEventListener('click', async (event) => {
       const target = event.target;
       if (target.tagName === 'A') {
         event.preventDefault();
@@ -81,17 +77,20 @@
     });
 
     // On page load, add your list of pages to the pageList
-    // For example:
-     const pages = await fetchAllHTMLPages();
-	 updateIframe(pages[0])
-     pages.forEach((page) => {
-       const listItem = document.createElement('li');
-       const link = document.createElement('a');
-       link.href = page;
-       link.textContent = page; // You can set more user-friendly names if needed
-       listItem.appendChild(link);
-       pageList.appendChild(listItem);
-     });
+    async function initialize() {
+      const pages = await fetchAllHTMLPages();
+      updateIframe(pages[0]);
+      pages.forEach((page) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = page;
+        link.textContent = page; // You can set more user-friendly names if needed
+        listItem.appendChild(link);
+        pageList.appendChild(listItem);
+      });
+    }
+
+    initialize();
   </script>
 </body>
 </html>

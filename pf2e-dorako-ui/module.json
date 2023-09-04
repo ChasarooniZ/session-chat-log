@@ -1,0 +1,116 @@
+{
+    "id": "pf2e-dorako-ui",
+    "title": "PF2e Dorako UI",
+    "description": "Overhauls the Foundry UI and several modules.",
+    "url": "https://github.com/Dorako/pf2e-dorako-ui",
+    "authors": [
+        {
+            "name": "Dorako",
+            "url": "https://github.com/Dorako/pf2e-dorako-ui",
+            "email": "dirako@gmail.com",
+            "discord": "Dorako#0657",
+            "flags": {}
+        }
+    ],
+    "version": "2.2.4",
+    "compatibility": {
+        "minimum": "10",
+        "verified": "11"
+    },
+    "relationships": {
+        "systems": [
+            {
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "4.0.0",
+                    "verified": "5.0.1"
+                }
+            },
+            {
+                "id": "swade",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "2.2.5",
+                    "verified": "2.2.5"
+                }
+            }
+        ]
+    },
+    "media": [
+        {
+            "type": "setup",
+            "name": "Setup Screen",
+            "url": "modules/pf2e-dorako-ui/img/hero.webp"
+        }
+    ],
+    "flags": {
+        "hotReload": {
+            "extensions": [
+                ".css",
+                ".json"
+            ]
+        }
+    },
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json",
+            "flags": {}
+        },
+        {
+            "lang": "fr",
+            "name": "Français",
+            "path": "languages/fr.json"
+        },
+        {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "languages/de.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português",
+            "path": "languages/pt.json"
+        },
+        {
+            "lang": "ja",
+            "name": "日本語",
+            "path": "languages/ja.json"
+        },
+        {
+            "lang": "cn",
+            "name": "中文（简体）",
+            "path": "languages/zh_Hans.json"
+        },
+        {
+            "lang": "zh-tw",
+            "name": "正體中文",
+            "path": "languages/zh-tw.json"
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "languages/es.json"
+        }
+    ],
+    "styles": [
+        "styles/fonts.css"
+    ],
+    "esmodules": [
+        "modules/misc-hooks.js",
+        "modules/settings/settings.js",
+        "modules/dark-theme-hooks.js",
+        "modules/base-theme-hooks.js",
+        "modules/message-hooks.js",
+        "modules/premium-module-hooks.js",
+        "modules/consts.js",
+        "modules/pixi.js"
+    ],
+    "changelog": "https://github.com/Dorako/pf2e-dorako-ui/blob/master/CHANGELOG.md",
+    "download": "https://github.com/Dorako/pf2e-dorako-ui/releases/download/v2.2.4/module.zip",
+    "manifest": "https://github.com/Dorako/pf2e-dorako-ui/releases/latest/download/module.json",
+    "readme": "https://github.com/Dorako/pf2e-dorako-ui",
+    "bugs": "https://github.com/Dorako/pf2e-dorako-ui/issues"
+}

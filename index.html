@@ -59,7 +59,7 @@
         const doc = parser.parseFromString(text, 'text/html');
 
         // Find all <a> elements that link to .html pages (excluding 'index.html')
-        const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href="index.html"])'));
+        const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href$="index.html"])'));
         return links.map(link => link.getAttribute('href'));
       } catch (error) {
         console.error('Error fetching HTML pages:', error);
@@ -79,7 +79,6 @@
     // On page load, add your list of pages to the pageList
     async function initialize() {
       const pages = await fetchAllHTMLPages();
-      updateIframe(pages[0]);
       pages.forEach((page) => {
         const listItem = document.createElement('li');
         const link = document.createElement('a');
@@ -88,6 +87,10 @@
         listItem.appendChild(link);
         pageList.appendChild(listItem);
       });
+      // Load the first page by default if available
+      if (pages.length > 0) {
+        updateIframe(pages[0]);
+      }
     }
 
     initialize();

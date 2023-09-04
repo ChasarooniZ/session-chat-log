@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Selector</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    #pageListContainer {
+      width: 67%;
+      height: 100%;
+      background-color: #f0f0f0;
+      overflow-y: auto;
+    }
+
+    #iframeContainer {
+      width: 33%;
+      height: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="pageListContainer">
+    <h2>Page List</h2>
+    <ul id="pageList">
+      <!-- You can dynamically generate the list of pages here using JavaScript -->
+      <!-- For example: -->
+      <!-- <li><a href="page1.html">Page 1</a></li> -->
+      <!-- <li><a href="page2.html">Page 2</a></li> -->
+      <!-- <li><a href="page3.html">Page 3</a></li> -->
+    </ul>
+  </div>
+
+  <div id="iframeContainer">
+    <iframe id="selectedPageIframe" src=""></iframe>
+  </div>
+
+  <script>
+    const pageList = document.getElementById('pageList');
+    const iframe = document.getElementById('selectedPageIframe');
+
+    // Function to update the iframe's source based on the selected page
+    function updateIframe(pageUrl) {
+      iframe.src = pageUrl;
+    }
+
+    // Event listener for clicking on a page link
+    pageList.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target.tagName === 'A') {
+        event.preventDefault();
+        updateIframe(target.href);
+      }
+    });
+
+    // On page load, add your list of pages to the pageList
+    // For example:
+     const pages = ['fvtt-log-Tue-Jul-11-2023.html', 'fvtt-log-Mon-Jul-24-2023.html', 'fvtt-log-Sun-Jul-30-2023.html'];
+	 updateIframe(pages[0])
+     pages.forEach((page) => {
+       const listItem = document.createElement('li');
+       const link = document.createElement('a');
+       link.href = page;
+       link.textContent = page; // You can set more user-friendly names if needed
+       listItem.appendChild(link);
+       pageList.appendChild(listItem);
+     });
+  </script>
+</body>
+</html>

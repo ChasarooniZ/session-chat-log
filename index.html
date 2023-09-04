@@ -54,6 +54,22 @@
     function updateIframe(pageUrl) {
       iframe.src = pageUrl;
     }
+  async function fetchAllHTMLPages() {
+            try {
+                const response = await fetch('.');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                // Find all <a> elements that link to .html pages (excluding 'index.html')
+                const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href="index.html"])'));
+                return links.map(link => link.getAttribute('href'));
+            } catch (error) {
+                console.error('Error fetching HTML pages:', error);
+                return [];
+            }
+        }
+
 
     // Event listener for clicking on a page link
     pageList.addEventListener('click', (event) => {
@@ -66,7 +82,7 @@
 
     // On page load, add your list of pages to the pageList
     // For example:
-     const pages = ['fvtt-log-Tue-Jul-11-2023.html', 'fvtt-log-Mon-Jul-24-2023.html', 'fvtt-log-Sun-Jul-30-2023.html'];
+     const pages = await fetchAllHTMLPages();
 	 updateIframe(pages[0])
      pages.forEach((page) => {
        const listItem = document.createElement('li');

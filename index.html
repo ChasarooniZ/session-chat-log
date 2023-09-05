@@ -53,11 +53,12 @@
 
     async function fetchAllHTMLPages() {
       try {
-        const response = await fetch('.');
+        const baseUrl = window.location.origin; // Get the base URL
+        const response = await fetch(baseUrl); // Fetch from the base URL
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
-
+    
         // Find all <a> elements that link to .html pages (excluding 'index.html')
         const links = Array.from(doc.querySelectorAll('a[href$=".html"]:not([href$="index.html"])'));
         return links.map(link => link.getAttribute('href'));
